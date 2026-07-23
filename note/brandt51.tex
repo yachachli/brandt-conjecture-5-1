@@ -30,21 +30,23 @@ AI assistance and independent verification.}}
 \begin{abstract}
 Brandt conjectured in 2002 that every maximal triangle-free graph $G$ whose fractional total
 domination number satisfies $\df(G)<3$ admits a nonnegative rational solution of
-$A(G)x=\ones$. Conditional on Theorem~1.2 of the preprint \emph{Strong Brandt--Thomass\'e
-Theorems} by \L{}uczak, Polcyn, and Reiher (arXiv:2406.10745), we prove the conjecture with
-the stronger conclusion that the solution may be taken strictly positive. The argument has
-three ingredients: a failure of the property $D_4$ of \L{}uczak--Polcyn--Reiher yields,
-directly, a feasible dual solution of value $3$ for the fractional total domination linear
-program, so $\df(G)<3$ forces $D_4$; their Theorem~1.2 then classifies $G$ as a blow-up of an
-Andr\'asfai or Vega graph; and we supply explicit positive rational equality weights for every
-Andr\'asfai graph and all four Vega variants. It follows, conditionally, that for maximal
-triangle-free graphs the conditions $\df(G)<3$, property $D_4$, and membership in the class of
-Andr\'asfai/Vega blow-ups coincide, and that Brandt's regular-supergraph conjecture
-(Conjecture~4.1 of the same paper) and his Conjectures~5.2 and~5.3 hold as well. The strict inequality is necessary: we exhibit a
-$9$-vertex maximal triangle-free graph with $\df=3$ whose equality solutions all have a forced
-zero coordinate; this graph also refutes, at the boundary, the non-strict positive-multiplicity
-variant recorded on D.~West's open problems page. The consequence appears to be unstated in
-the literature we searched; no priority claim is made, and specialist review is requested.
+$A(G)x=\ones$. We make two observations. First, the conjecture follows from ingredients
+already present in the literature: the Brandt--Thomass\'e structure theorem for maximal
+triangle-free graphs of minimum degree exceeding $n/3$, combined with the explicit equality
+weights on Andr\'asfai and Vega graphs going back to Brandt--Pisanski and
+Brandt--Thomass\'e (recorded in the published 2021 work of \L{}uczak, Polcyn, and Reiher),
+via a short rational blow-up argument; the same deduction settles Conjectures~4.1, 5.2,
+and~5.3 of Brandt's paper. These resolutions appear not to have been stated explicitly
+before. Second, conditional on Theorem~1.2 of the 2024 preprint \emph{Strong
+Brandt--Thomass\'e Theorems} (arXiv:2406.10745), a linear-programming duality argument
+upgrades this to an exact characterization: for maximal triangle-free graphs, $\df(G)<3$,
+the first-order property $D_4$, and membership in the class of Andr\'asfai/Vega blow-ups
+all coincide, and the equality solution may always be taken strictly positive. The strict
+threshold is exact: a $9$-vertex maximal triangle-free graph with $\df=3$ admits
+nonnegative but no positive equality solutions, refuting the non-strict variant recorded on
+D.~West's open problems page. All external structural inputs remain unrefereed (an
+unpublished manuscript and a 2024 preprint); no priority claim is made, and specialist
+review is requested.
 \end{abstract}
 
 \section{Introduction}
@@ -60,7 +62,9 @@ with LP dual
 \end{equation}
 Since $A=A^T$, the transpose is retained only to display the standard pairing. For a graph
 with no isolated vertex both programs are feasible and bounded, strong duality holds, and
-rational optimal certificates exist.
+rational optimal certificates exist. For the one-vertex graph the primal program is
+infeasible and $\df=\infty$ by convention; maximal triangle-free graphs on at least two
+vertices have no isolated vertices, so all statements below are nonvacuous exactly there.
 
 A graph is \emph{maximal triangle-free} (MTF) if it is triangle-free and the addition of any
 missing edge creates a triangle; equivalently, every two nonadjacent vertices have a common
@@ -193,7 +197,13 @@ vertex $2i-1$ is present iff $\nu=0$. Then $|V(\Upsilon_i^{\mu\nu})|=3i+7-\mu-\n
 D=D_{\mu\nu}=9i-6-\mu-\nu .
 \]
 
-\begin{theorem}\label{thm:vega}
+The weights below are not new: they originate in the Brandt--Thomass\'e manuscript
+\cite{BT}, the underlying regular-blow-up observation goes back to Brandt--Pisanski
+\cite{BP}, and both are recorded, with the same table, in
+\cite[Section~4.1, Fact~4.2 and Figure~4.2]{LPR2021}. We restate them and verify the
+identities in a self-contained way.
+
+\begin{theorem}[Brandt--Thomass\'e; see {\cite[Fact~4.2]{LPR2021}}]\label{thm:vega}
 For every $i\ge2$ and $\mu,\nu\in\{0,1\}$ there is a positive integer vector
 $w=w_i^{\mu\nu}$ on $V(\Upsilon_i^{\mu\nu})$ with
 \[
@@ -352,6 +362,46 @@ from Conjecture~5.1 in \cite[Section~5]{Brandt2002}, so they follow from
 Theorem~\ref{thm:main}.
 \end{proof}
 
+\section{A shorter route to Conjecture~\ref{conj:brandt}}\label{sec:short}
+
+The strong classification of \cite{LPR} is not needed for Conjecture~\ref{conj:brandt}
+alone: the ordinary Brandt--Thomass\'e structure theorem suffices. That theorem, proved in
+the unpublished manuscript \cite{BT} and recorded in \cite{LPR2021} and
+\cite[Section~1]{LPR}, states that every maximal triangle-free graph with minimum degree
+exceeding $n/3$ is a blow-up of an Andr\'asfai or Vega graph. (It is also a consequence of
+Theorem~\ref{thm:lpr}, since minimum degree exceeding $n/3$ implies $D_k$ for every $k$
+\cite{LPR}.)
+
+\begin{theorem}\label{thm:short}
+Assume the Brandt--Thomass\'e structure theorem. Then Conjecture~\ref{conj:brandt} holds
+with a strictly positive solution, and Conjectures~4.1, 5.2, and~5.3 of \cite{Brandt2002}
+hold as well.
+\end{theorem}
+
+\begin{proof}
+Let $G$ be maximal triangle-free with $\df(G)<3$, witnessed by a rational $p\ge0$ with
+$Ap\ge\ones$ and $\ones^Tp<3$. Adding a small positive rational multiple of $\ones$
+preserves both constraints, so we may take $p>0$. Choose a positive integer $L$ with
+$m=Lp\in\mathbb Z_{>0}^{V(G)}$, and let $H$ be the blow-up of $G$ with class sizes $m_v$.
+Then $|V(H)|=\ones^Tm=L\,\ones^Tp<3L$, while every vertex of $H$ in the class of $v$ has
+degree $(Am)_v=L(Ap)_v\ge L>|V(H)|/3$. By Lemma~\ref{lem:mtf}, $H$ is maximal
+triangle-free, so the structure theorem makes $H$ a blow-up of an Andr\'asfai or Vega
+graph. By \eqref{eq:dfandrasfai}, Theorem~\ref{thm:vega}, and Lemma~\ref{lem:blowup}, $H$
+then carries a positive rational vector $y$ with $A_Hy=\ones$. Finally, viewing $H$ as a
+blow-up of $G$ and summing $y$ over its classes (Lemma~\ref{lem:blowup} again) gives $x>0$
+with $A_Gx=\ones$. Conjecture~4.1 follows by clearing denominators as in
+Corollary~\ref{cor:brandtothers}, and Conjectures~5.2 and~5.3 by the derivations in
+\cite[Section~5]{Brandt2002}.
+\end{proof}
+
+This argument, which was pointed out during independent review of an earlier version of
+this note, shows that Conjecture~\ref{conj:brandt} was in essence a consequence of
+previously available results, although we have not located a place where the deduction is
+stated. The role of the 2024 classification \cite{LPR} in this note is therefore not to
+prove Conjecture~\ref{conj:brandt}, but to characterize \emph{exactly} which maximal
+triangle-free graphs satisfy $\df<3$ (Theorem~\ref{thm:main}); the shorter argument gives
+no such converse.
+
 \section{Sharpness at $\df=3$}\label{sec:sharp}
 
 Let $W$ be the graph with \texttt{graph6} code \texttt{H?q`qjo}, i.e.\ $V=\{0,\dots,8\}$ and
@@ -404,7 +454,10 @@ research sessions directed by the author. Subsequently, every step was verified
 independently of those sessions: Lemma~\ref{lem:duality} by hand; the statements of
 Definition~\ref{def:dk} and Theorem~\ref{thm:lpr} against the posted text of \cite{LPR};
 Theorem~\ref{thm:vega} and Section~\ref{sec:sharp} by machine, using the standalone scripts
-distributed with this note. The author takes full responsibility for the content.
+distributed with this note. A further independent review (also AI-assisted) identified the
+prior appearance of the Vega weights in \cite{BT,BP,LPR2021} and supplied the shorter
+argument of Section~\ref{sec:short}; this version incorporates both corrections. The
+author takes full responsibility for the content.
 
 \begin{thebibliography}{9}
 
@@ -428,7 +481,19 @@ open problem page,
 \bibitem{BT}
 S.~Brandt and S.~Thomass\'e,
 \emph{Dense triangle-free graphs are four-colorable: a solution to the
-Erd\H{o}s--Simonovits problem}, manuscript.
+Erd\H{o}s--Simonovits problem}, unpublished manuscript, available from
+S.~Thomass\'e's webpage.
+
+\bibitem{BP}
+S.~Brandt and T.~Pisanski,
+\emph{Another infinite sequence of dense triangle-free graphs},
+Electron. J. Combin. \textbf{5} (1998), Research Paper 43.
+
+\bibitem{LPR2021}
+T.~\L{}uczak, J.~Polcyn, and C.~Reiher,
+\emph{Andr\'asfai and Vega graphs in Ramsey--Tur\'an theory},
+J. Graph Theory (2021), DOI \href{https://doi.org/10.1002/jgt.22682}{10.1002/jgt.22682};
+\href{https://arxiv.org/abs/2002.01498}{arXiv:2002.01498}.
 
 \end{thebibliography}
 
