@@ -77,13 +77,15 @@ emphasized this computability. Conditionally, membership in the Brandt–Thomass
 class is therefore decidable by solving one LP and comparing the optimum with 3.
 
 **The `d_f` spectrum below 3 is discrete.** An immediate consequence of Claim 2 and the
-computed values: on maximal triangle-free graphs, `d_f` takes *no* value below 3 other than
+computed values (Corollary in the note): on maximal triangle-free graphs, `d_f` takes *no*
+value below 3 other than
 ```
-3 − 1/i   (i ≥ 1, Andrásfai)     and     3 − 1/(9i−6−μ−ν)   (i ≥ 2; μ,ν ∈ {0,1}, Vega),
+3 − 1/k,   k = 1, 2, 3, …
 ```
-a discrete set whose only accumulation point is 3. Everything else in `[?, 3)` is forbidden.
-The threshold value 3 itself is attained, and is genuinely different: the 9-vertex graph
-below has `d_f = 3` and is *not* regularizable.
+(the Andrásfai graphs `Γ_k` attain every such value; the Vega values `3 − 1/(9i−6−μ−ν)`
+form a subset). The set is discrete with sole accumulation point 3 — everything else below
+3 is forbidden. The threshold value 3 itself is attained and is genuinely different: the
+9-vertex graph below has `d_f = 3` and is *not* regularizable.
 
 **A correction to the public record.** The variant of Conjecture 4.1 recorded on West's
 open problems page uses the non-strict bound `δ(G) ≥ n/3`. The 9-vertex sharpness example

@@ -362,6 +362,36 @@ from Conjecture~5.1 in \cite[Section~5]{Brandt2002}, so they follow from
 Theorem~\ref{thm:main}.
 \end{proof}
 
+\begin{corollary}[the spectrum of $\df$ below $3$]\label{cor:spectrum}
+Assume Theorem~\ref{thm:lpr}. The set of values taken by $\df$ below $3$ on finite maximal
+triangle-free graphs is exactly
+\[
+\Bigl\{\,3-\tfrac1k \;:\; k\in\mathbb Z_{\ge1}\Bigr\},
+\]
+a discrete set whose only accumulation point is $3$.
+\end{corollary}
+
+\begin{proof}
+If $G$ is maximal triangle-free with $\df(G)<3$, Theorem~\ref{thm:main} makes $G$ a
+nonempty blow-up of some $\Gamma_i$ or $\Upsilon_i^{\mu\nu}$, and $\df$ is a blow-up
+invariant (Lemma~\ref{lem:blowup}), so by \eqref{eq:dfandrasfai} and
+Theorem~\ref{thm:vega},
+\[
+\df(G)=3-\tfrac1i
+\qquad\text{or}\qquad
+\df(G)=3-\tfrac1{D_{\mu\nu}},
+\]
+and $D_{\mu\nu}=9i-6-\mu-\nu$ is a positive integer. Hence every value below $3$ has the
+form $3-1/k$ with $k\in\mathbb Z_{\ge1}$. Conversely, $\Gamma_k$ is maximal triangle-free
+and attains $3-1/k$ for every $k\ge1$ (for $k=1$, $\Gamma_1=K_2$ with $\df=2$). Thus the
+Vega values form a subset of the Andr\'asfai values, and the spectrum is exactly as
+stated.
+\end{proof}
+
+By contrast, the value $3$ itself is attained -- for instance by the graph $W$ of
+Section~\ref{sec:sharp}, which is moreover not regularizable -- so the exclusion of
+values applies only below the threshold.
+
 \section{A shorter route to Conjecture~\ref{conj:brandt}}\label{sec:short}
 
 The strong classification of \cite{LPR} is not needed for Conjecture~\ref{conj:brandt}
