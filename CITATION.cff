@@ -5,8 +5,7 @@ authors:
   - family-names: "Hazan"
     given-names: "Yahli"
 type: software
-# If a DOI is minted for a tagged release (e.g. via Zenodo), add:
-# doi: 10.XXXX/zenodo.XXXXXXX
+doi: 10.5281/zenodo.21518998
 abstract: >-
   A short note proving, conditional on Theorem 1.2 of Łuczak-Polcyn-Reiher
   (arXiv:2406.10745), Brandt's 2002 conjecture that maximal triangle-free graphs with

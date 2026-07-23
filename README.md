@@ -1,5 +1,7 @@
 # Brandt's Conjecture 5.1, resolved via the Strong Brandt–Thomassé theorem
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21518998.svg)](https://doi.org/10.5281/zenodo.21518998)
+
 **Status: conditional result, pending specialist review.** This repository contains a short
 mathematical note and machine verification scripts for the following claim:
 
