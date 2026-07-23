@@ -19,7 +19,7 @@ for maximal triangle-free graphs:
 d_f(G) < 3   ⟺   G satisfies D₄   ⟺   G is a (nonempty) blow-up of an Andrásfai or Vega graph
 ```
 
-## The proof in ten lines
+## The proof in five steps (plus sharpness)
 
 1. If `G` fails property D₄ (Łuczak–Polcyn–Reiher, Definition 1.1), the failing vertex sequence,
    scaled by `1/m`, is a feasible dual vector of objective exactly 3 for the fractional total
