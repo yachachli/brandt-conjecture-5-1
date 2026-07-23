@@ -1,0 +1,8 @@
+note/*.aux
+note/*.log
+note/*.out
+note/*.synctex.gz
+note/*.fls
+note/*.fdb_latexmk
+.DS_Store
+__pycache__/

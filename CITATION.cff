@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Brandt's conjecture on regularizable dense triangle-free graphs follows from the Strong Brandt-Thomassé theorem"
+authors:
+  - family-names: "Hazan"
+    given-names: "Yahli"
+type: software
+# If a DOI is minted for a tagged release (e.g. via Zenodo), add:
+# doi: 10.XXXX/zenodo.XXXXXXX
+abstract: >-
+  A short note proving, conditional on Theorem 1.2 of Łuczak-Polcyn-Reiher
+  (arXiv:2406.10745), Brandt's 2002 conjecture that maximal triangle-free graphs with
+  fractional total domination number below 3 admit nonnegative (in fact positive)
+  solutions of Ax=1, together with machine verification scripts.
+keywords:
+  - graph theory
+  - triangle-free graphs
+  - fractional domination
+  - Andrásfai graphs
+  - Vega graphs
+  - Brandt conjecture
+license: MIT

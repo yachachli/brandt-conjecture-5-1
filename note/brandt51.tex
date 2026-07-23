@@ -1,0 +1,435 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\df}{d_f}
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\R}{\mathcal R}
+\newcommand{\G}{\mathcal G}
+\newcommand{\B}{\mathcal B}
+
+\title{Brandt's conjecture on regularizable dense triangle-free graphs\\
+follows from the Strong Brandt--Thomass\'e theorem}
+\author{Yahli Hazan\thanks{yalul.com@gmail.com. See Section~\ref{sec:provenance} for a statement on
+AI assistance and independent verification.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Brandt conjectured in 2002 that every maximal triangle-free graph $G$ whose fractional total
+domination number satisfies $\df(G)<3$ admits a nonnegative rational solution of
+$A(G)x=\ones$. Conditional on Theorem~1.2 of the preprint \emph{Strong Brandt--Thomass\'e
+Theorems} by \L{}uczak, Polcyn, and Reiher (arXiv:2406.10745), we prove the conjecture with
+the stronger conclusion that the solution may be taken strictly positive. The argument has
+three ingredients: a failure of the property $D_4$ of \L{}uczak--Polcyn--Reiher yields,
+directly, a feasible dual solution of value $3$ for the fractional total domination linear
+program, so $\df(G)<3$ forces $D_4$; their Theorem~1.2 then classifies $G$ as a blow-up of an
+Andr\'asfai or Vega graph; and we supply explicit positive rational equality weights for every
+Andr\'asfai graph and all four Vega variants. It follows, conditionally, that for maximal
+triangle-free graphs the conditions $\df(G)<3$, property $D_4$, and membership in the class of
+Andr\'asfai/Vega blow-ups coincide, and that Brandt's regular-supergraph conjecture
+(Conjecture~4.1 of the same paper) and his Conjectures~5.2 and~5.3 hold as well. The strict inequality is necessary: we exhibit a
+$9$-vertex maximal triangle-free graph with $\df=3$ whose equality solutions all have a forced
+zero coordinate; this graph also refutes, at the boundary, the non-strict positive-multiplicity
+variant recorded on D.~West's open problems page. The consequence appears to be unstated in
+the literature we searched; no priority claim is made, and specialist review is requested.
+\end{abstract}
+
+\section{Introduction}
+
+All graphs in this note are finite and simple. For a graph $G$ with adjacency matrix
+$A=A(G)$ and all-ones vector $\ones$, the \emph{fractional total domination number} is
+\begin{equation}\label{eq:primal}
+\df(G)=\min\bigl\{\ones^Tp : p\in\mathbb R^{V(G)}_{\ge0},\ Ap\ge\ones\bigr\},
+\end{equation}
+with LP dual
+\begin{equation}\label{eq:dual}
+\df(G)=\max\bigl\{\ones^Tz : z\in\mathbb R^{V(G)}_{\ge0},\ A^Tz\le\ones\bigr\}.
+\end{equation}
+Since $A=A^T$, the transpose is retained only to display the standard pairing. For a graph
+with no isolated vertex both programs are feasible and bounded, strong duality holds, and
+rational optimal certificates exist.
+
+A graph is \emph{maximal triangle-free} (MTF) if it is triangle-free and the addition of any
+missing edge creates a triangle; equivalently, every two nonadjacent vertices have a common
+neighbour.
+
+In \cite[Conjecture~5.1]{Brandt2002}, Brandt made the following conjecture; the statement
+below is verbatim up to typography, and his equation~(3) defines $\df$ exactly as in
+\eqref{eq:primal}.
+
+\begin{conjecture}[{Brandt \cite[Conjecture~5.1]{Brandt2002}}]\label{conj:brandt}
+If $G$ is a maximal triangle-free graph with $\df(G)<3$ then $A(G)x=\ones$ has a rational
+solution $x\ge0$.
+\end{conjecture}
+
+Brandt introduced Conjecture~\ref{conj:brandt} as a linear-programming relaxation of his
+regular-supergraph conjecture \cite[Conjecture~4.1]{Brandt2002}: every maximal
+triangle-free graph with minimum degree \emph{exceeding} $n/3$ has a regular supergraph
+obtained by vertex multiplications. He further observed \cite[p.~43]{Brandt2002} that on a
+\emph{core} (twin-free graph), every nonnegative rational solution of $Ax=\ones$ under
+$\df(G)<3$ is automatically strictly positive; the proof below delivers positivity
+directly for the full hypothesis class.
+
+The conjecture connects an optimization threshold to a regularization property: positive
+integer multiplicities $m_v$ with $Am=d\ones$ describe a vertex multiplication of $G$ into a
+$d$-regular graph, and scaling shows such a multiplication exists exactly when $Ax=\ones$ has
+a positive rational solution. A non-strict variant of the statement, with hypothesis
+$\delta(G)\ge |V(G)|/3$ and positive multiplicities, is recorded on West's open problems
+page \cite{WestPage}; see Section~\ref{sec:sharp}.
+
+The external input to our argument is the classification theorem of \L{}uczak, Polcyn, and
+Reiher \cite{LPR}. All statements below that depend on it are conditional on the correctness
+of that preprint, which is unrefereed at the time of writing.
+
+\section{The classification input}\label{sec:lpr}
+
+We transcribe the two statements of \cite{LPR} that we use.
+
+\begin{definition}[{\cite[Definition~1.1]{LPR}}]\label{def:dk}
+For $k\in\mathbb N$, a graph $G$ has property $D_k$ if for every $m\in[k]=\{1,\dots,k\}$ and
+every sequence $x_1,\dots,x_{3m}\in V(G)$ of not necessarily distinct vertices there exists
+$y\in V(G)$ with
+\[
+\bigl|\{j\in[3m] : x_jy\in E(G)\}\bigr|\ \ge\ m+1 .
+\]
+\end{definition}
+
+Adjacency is thus counted with sequence multiplicity, and $D_4$ quantifies over
+$m\in\{1,2,3,4\}$.
+
+For a base graph $H$, a \emph{blow-up} of $H$ replaces each vertex $v$ by a nonempty
+independent set $C_v$, with complete bipartite graphs between $C_u$ and $C_v$ exactly when
+$uv\in E(H)$. Every class is nonempty; vertex deletions are not blow-ups.
+
+\begin{theorem}[{\cite[Theorem~1.2]{LPR}}]\label{thm:lpr}
+A maximal triangle-free graph satisfies $D_4$ if and only if it is a blow-up of either an
+Andr\'asfai or a Vega graph.
+\end{theorem}
+
+The Andr\'asfai and Vega graphs are recalled in Sections~\ref{sec:andrasfai}
+and~\ref{sec:vega}, following the constructions in \cite{LPR}.
+
+\section{Failure of $D_4$ gives a dual certificate of value three}
+
+\begin{lemma}\label{lem:duality}
+Let $G$ be a finite graph. If $G$ fails $D_4$, then $\df(G)\ge3$. Equivalently,
+$\df(G)<3$ implies that $G$ satisfies $D_4$.
+\end{lemma}
+
+\begin{proof}
+If $G$ fails $D_4$, there are $m\in\{1,2,3,4\}$ and a sequence $x_1,\dots,x_{3m}\in V(G)$
+such that every $y\in V(G)$ satisfies
+\begin{equation}\label{eq:fail}
+\bigl|\{j\in[3m] : x_jy\in E(G)\}\bigr|\ \le\ m .
+\end{equation}
+Let $c_v=|\{j : x_j=v\}|$ be the multiplicity of $v$, and set $z_v=c_v/m$. Then $z\ge0$ and
+$\ones^Tz=\tfrac1m\sum_v c_v=\tfrac{3m}m=3$. For every $y$,
+\[
+(A^Tz)_y=\sum_{v\in N(y)}\frac{c_v}{m}
+=\frac1m\,\bigl|\{j : x_jy\in E(G)\}\bigr|\ \le\ 1
+\]
+by \eqref{eq:fail}. So $z$ is feasible for \eqref{eq:dual} with value $3$, and weak duality
+gives $\df(G)\ge3$.
+\end{proof}
+
+\begin{remark}\label{rem:m1}
+The abstract of \cite{LPR} highlights $m\in\{2,3,4\}$, while Definition~\ref{def:dk} formally
+includes $m=1$; Lemma~\ref{lem:duality} covers all four values, so no mismatch arises. For
+MTF graphs on at least two vertices $D_1$ is automatic anyway: in a sequence of three
+vertices, either some vertex repeats (any neighbour of it meets two positions) or the three
+are distinct, hence not a triangle, so two of them are nonadjacent and maximality provides a
+common neighbour.
+\end{remark}
+
+\section{Andr\'asfai graphs}\label{sec:andrasfai}
+
+For $i\ge1$ the Andr\'asfai graph $\Gamma_i$ has vertex set $\mathbb Z/(3i-1)\mathbb Z$, with
+$r\sim s$ exactly when $r-s\bmod(3i-1)\in\{i,\dots,2i-1\}$. It is $i$-regular on $3i-1$
+vertices and maximal triangle-free. Setting $x_v=1/i$ for every $v$ gives $Ax=\ones$, $x>0$;
+the same vector is dual feasible since $A^Tx=Ax=\ones$, so it is simultaneously primal and
+dual optimal and
+\begin{equation}\label{eq:dfandrasfai}
+\df(\Gamma_i)=\frac{3i-1}{i}=3-\frac1i\ <\ 3 .
+\end{equation}
+
+\section{Vega graphs and explicit equality weights}\label{sec:vega}
+
+Fix $i\ge2$. Following \cite{LPR}, start with an inner copy of $\Gamma_i$ on
+$\{0,1,\dots,3i-2\}$ with the three independent colour classes
+\[
+\R=\{0,\dots,i-1\},\qquad
+\G=\{i,\dots,2i-1\},\qquad
+\B=\{2i,\dots,3i-2\}.
+\]
+Add an external hexagon $a\,{-}\,v\,{-}\,c\,{-}\,u\,{-}\,b\,{-}\,w\,{-}\,a$ and two further
+vertices $x,y$, with
+\[
+N(a)\cap V(\Gamma_i)=N(u)\cap V(\Gamma_i)=\R,\quad
+N(b)\cap V(\Gamma_i)=N(v)\cap V(\Gamma_i)=\G,\quad
+N(c)\cap V(\Gamma_i)=N(w)\cap V(\Gamma_i)=\B,
+\]
+\[
+N(x)\cap\{a,b,c,u,v,w,y\}=\{a,b,c,y\},\qquad
+N(y)\cap\{a,b,c,u,v,w,x\}=\{u,v,w,x\}.
+\]
+This graph is $\Upsilon_i^{00}$; the variants are
+$\Upsilon_i^{10}=\Upsilon_i^{00}-y$, $\Upsilon_i^{01}=\Upsilon_i^{00}-(2i{-}1)$, and
+$\Upsilon_i^{11}=\Upsilon_i^{00}-\{y,\,2i{-}1\}$, so $y$ is present iff $\mu=0$ and the inner
+vertex $2i-1$ is present iff $\nu=0$. Then $|V(\Upsilon_i^{\mu\nu})|=3i+7-\mu-\nu$. Set
+\[
+D=D_{\mu\nu}=9i-6-\mu-\nu .
+\]
+
+\begin{theorem}\label{thm:vega}
+For every $i\ge2$ and $\mu,\nu\in\{0,1\}$ there is a positive integer vector
+$w=w_i^{\mu\nu}$ on $V(\Upsilon_i^{\mu\nu})$ with
+\[
+Aw=D\,\ones,\qquad \ones^Tw=3D-1 .
+\]
+Consequently $q=w/D$ is a positive rational solution of $Aq=\ones$, it is simultaneously
+primal and dual optimal, and
+\[
+\df\bigl(\Upsilon_i^{\mu\nu}\bigr)=3-\frac1{D}\ <\ 3 .
+\]
+\end{theorem}
+
+\begin{proof}
+Define $w$ as follows. Inner vertices: if $\nu=0$, put $w_0=w_{2i-1}=1$ and $w_j=3$ for all
+other inner $j$; if $\nu=1$ (vertex $2i-1$ deleted), put $w_0=w_{i-1}=2$ and $w_j=3$
+otherwise. External vertices, in the order $(a,v,c,u,b,w,x,y)$:
+\[
+\begin{array}{c|cccccccc}
+(\mu,\nu) & a & v & c & u & b & w & x & y\\\hline
+(0,0) & 3i{-}2 & 3i{-}2 & 3i{-}3 & 3i{-}2 & 3i{-}2 & 3i{-}3 & 1 & 1\\
+(1,0) & 3i{-}2 & 3i{-}3 & 3i{-}3 & 3i{-}3 & 3i{-}2 & 3i{-}4 & 2 & \text{--}\\
+(0,1) & 3i{-}2 & 3i{-}3 & 3i{-}3 & 3i{-}2 & 3i{-}3 & 3i{-}3 & 1 & 1\\
+(1,1) & 3i{-}2 & 3i{-}4 & 3i{-}3 & 3i{-}3 & 3i{-}3 & 3i{-}4 & 2 & \text{--}
+\end{array}
+\]
+All entries are positive for $i\ge2$ (the smallest is $3i-4\ge2$).
+
+Write $T_\mathcal{C}$ for the total inner weight of colour class $\mathcal C$ and
+$S_\mathcal{C}$ for the inner-neighbourhood weight of an inner vertex of class $\mathcal C$
+(well defined by the circulant structure and the placement of the special weights). A direct
+computation gives, for $\nu=0$:
+\[
+(T_\R,T_\G,T_\B)=(3i{-}2,\,3i{-}2,\,3i{-}3),\qquad
+(S_\R,S_\G,S_\B)=(3i{-}2,\,3i{-}2,\,3i),
+\]
+using that each red vertex is adjacent to $2i-1$ but not $0$, each green vertex to $0$ but
+not $2i-1$, and each blue vertex to neither. For $\nu=1$:
+\[
+(T_\R,T_\G,T_\B)=(3i{-}2,\,3i{-}3,\,3i{-}3),\qquad
+(S_\R,S_\G,S_\B)=(3i{-}3,\,3i{-}1,\,3i{-}1),
+\]
+using that red vertices lose the neighbour $2i-1$, while green (resp.\ blue) vertices are
+adjacent to $0$ (resp.\ $i-1$), of special weight $2$.
+
+The equation $(Aw)_z=D$ then verifies, class by class, as an affine identity in $i$. We
+display the variant $(\mu,\nu)=(0,0)$, where $D=9i-6$: for inner vertices,
+\[
+S_\R+w_a+w_u=S_\G+w_b+w_v=(3i{-}2)\cdot3=D,\qquad
+S_\B+w_c+w_w=3i+2(3i{-}3)=D;
+\]
+for the hexagon (each hexagon vertex sees its colour class total, its two hexagon
+neighbours, and one of $x,y$),
+\[
+T_\R+w_v+w_w+w_x
+=T_\G+w_a+w_c+w_y
+=\dots
+=(3i{-}2)+(3i{-}2)+(3i{-}3)+1=D,
+\]
+and for the outer vertices,
+\[
+(Aw)_x=w_a+w_b+w_c+w_y=(Aw)_y=w_u+w_v+w_w+w_x=(3i{-}2)+(3i{-}2)+(3i{-}3)+1=D .
+\]
+The totals are $\ones^Tw=(9i-7)+(18i-12)=27i-19=3D-1$. The three remaining variants verify
+by the same routine computation with their tables; every neighbourhood equation and both
+totals are affine identities in $i$, and all four variants have been machine-checked for
+$i=2,\dots,8$ together with maximal triangle-freeness of the constructed graphs (script
+\texttt{verify/vega\_weights.py} in the ancillary files).
+
+Finally, $q=w/D>0$ satisfies $Aq=\ones$, hence is primal feasible for \eqref{eq:primal} with
+value $(3D-1)/D$ and dual feasible for \eqref{eq:dual} with the same value, so
+$\df=3-1/D$.
+\end{proof}
+
+\section{Blow-ups and false twins}
+
+\begin{lemma}\label{lem:blowup}
+Let $G$ be a blow-up of $H$ with nonempty classes $(C_v)_{v\in V(H)}$. For $p$ on $V(G)$
+define $q_v=\sum_{a\in C_v}p_a$. Then $(A_Gp)_a=(A_Hq)_v$ for every $a\in C_v$, and
+$\ones^Tp=\ones^Tq$. Consequently:
+\begin{enumerate}
+\item $\df(G)=\df(H)$;
+\item $A_Gp=\ones$, $p\ge0$ is solvable iff $A_Hq=\ones$, $q\ge0$ is solvable;
+\item $A_Gp=\ones$, $p>0$ is solvable iff $A_Hq=\ones$, $q>0$ is solvable.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The displayed identity is immediate from the blow-up structure. Feasible vectors on $G$ give
+feasible class-sum vectors on $H$ with the same objective; conversely distribute $q_v$
+uniformly over $C_v$, $p_a=q_v/|C_v|$, which preserves feasibility and objective by the
+identity. For (3), positivity of class sums descends trivially, and the uniform lift is
+strictly positive precisely because every $|C_v|\ge1$. Rationality is preserved in both
+directions.
+\end{proof}
+
+\begin{lemma}\label{lem:mtf}
+If $H$ is maximal triangle-free with at least two vertices, then every blow-up of $H$ is
+maximal triangle-free. Conversely, every maximal triangle-free graph is a blow-up of its
+false-twin quotient, which is maximal triangle-free.
+\end{lemma}
+
+\begin{proof}
+A triangle in a blow-up projects to a triangle in the base, since classes are independent
+and adjacency between classes is complete or empty. A nonedge between classes $C_u\ne C_v$
+comes from a base nonedge $uv$, whose common neighbour $t$ lifts to the nonempty class
+$C_t$; a nonedge inside a class $C_u$ has a common neighbour in $C_t$ for any base
+neighbour $t$ of $u$, which exists since MTF graphs on $\ge2$ vertices have no isolated
+vertex. Conversely, vertices with equal open neighbourhoods are nonadjacent, classes are
+independent, and adjacency between classes is complete or empty, so $G$ is a nonempty
+blow-up of the quotient $H$; triangles in $H$ lift to $G$, and common neighbours of
+nonadjacent representatives descend to $H$.
+\end{proof}
+
+\section{Main theorem}
+
+\begin{theorem}\label{thm:main}
+Assume Theorem~\ref{thm:lpr}. Then for every finite maximal triangle-free graph $G$ the
+following are equivalent:
+\begin{enumerate}
+\item $\df(G)<3$;
+\item $G$ satisfies $D_4$;
+\item $G$ is a blow-up of an Andr\'asfai or Vega graph.
+\end{enumerate}
+Whenever these hold, $A(G)x=\ones$ has a strictly positive rational solution. In particular
+Conjecture~\ref{conj:brandt} is true.
+\end{theorem}
+
+\begin{proof}
+$(1)\Rightarrow(2)$ is Lemma~\ref{lem:duality}; $(2)\Leftrightarrow(3)$ is
+Theorem~\ref{thm:lpr}. For $(3)\Rightarrow(1)$ and the positive solution: by
+\eqref{eq:dfandrasfai} and Theorem~\ref{thm:vega} every base graph has $\df<3$ and a
+positive rational equality solution; Lemma~\ref{lem:blowup} transfers both along nonempty
+blow-ups (which are MTF by Lemma~\ref{lem:mtf}).
+\end{proof}
+
+\begin{corollary}
+Under the same assumption, if $A(G)x=\ones$, $x\ge0$ is infeasible for a maximal
+triangle-free $G$, then $\df(G)\ge3$. Moreover $\df(G)<3$ forces a solution with no zero
+coordinate, and, within maximal triangle-free graphs, the first-order property $D_4$
+coincides with the strict side of the LP threshold $\df<3$.
+\end{corollary}
+
+\begin{corollary}\label{cor:brandtothers}
+Assume Theorem~\ref{thm:lpr}. Then Conjectures~4.1, 5.2, and~5.3 of \cite{Brandt2002}
+hold as well.
+\end{corollary}
+
+\begin{proof}
+For Conjecture~4.1: if $\delta(G)>n/3$ then $\df(G)\le n/\delta(G)<3$, so
+Theorem~\ref{thm:main} yields a positive rational solution of $Ax=\ones$; clearing
+denominators gives positive integer multiplicities $m$ with $Am=d\ones$ for some integer
+$d$, and the corresponding vertex multiplication is a $d$-regular supergraph of $G$.
+Conjecture~5.2 ($\df=\chi_f$ for maximal triangle-free graphs with $\df<3$) and
+Conjecture~5.3 (fractional-chromatic criticality of the cores in this class) are derived
+from Conjecture~5.1 in \cite[Section~5]{Brandt2002}, so they follow from
+Theorem~\ref{thm:main}.
+\end{proof}
+
+\section{Sharpness at $\df=3$}\label{sec:sharp}
+
+Let $W$ be the graph with \texttt{graph6} code \texttt{H?q`qjo}, i.e.\ $V=\{0,\dots,8\}$ and
+\[
+E(W)=\{04,05,08,\ 14,17,18,\ 25,26,28,\ 36,37,38,\ 46,57\}.
+\]
+Each neighbourhood is independent and every nonedge has a common neighbour, so $W$ is
+maximal triangle-free, with degree sequence $(3^8,4)$ and $\delta(W)=3=|V(W)|/3$.
+
+The vector $p=(1,0,0,1,0,0,0,0,1)^T$ satisfies $Ap\ge\ones$, $\ones^Tp=3$; the vector
+$z=\tfrac12(1,0,0,1,1,1,1,1,0)^T$ satisfies $A^Tz=\ones$, $\ones^Tz=3$. Hence $\df(W)=3$
+exactly. The complete nonnegative solution family of $Ax=\ones$ is
+\[
+x(t)=\bigl(t,\ \tfrac12-t,\ \tfrac12-t,\ t,\ \tfrac12,\ \tfrac12,\ \tfrac12,\ \tfrac12,\ 0\bigr)^T,
+\qquad 0\le t\le\tfrac12,
+\]
+and the zero is forced: $r=\tfrac12(0,1,1,0,-1,-1,-1,-1,2)^T$ satisfies $A^Tr=e_8$ and
+$\ones^Tr=0$, so every solution of $Ax=\ones$ has $x_8=r^TAx=r^T\ones=0$.
+
+Thus $W$ has nonnegative equality solutions but no positive one: no vertex multiplication of
+$W$ yields a regular graph. Since Conjecture~\ref{conj:brandt} hypothesises the strict
+inequality $\df(G)<3$, and Brandt's Conjecture~4.1 hypothesises minimum degree strictly
+exceeding $n/3$, the graph $W$ (with $\df=3$ and $\delta=n/3$ exactly) contradicts nothing
+in \cite{Brandt2002}; rather, it shows both strict hypotheses are necessary, so the
+threshold in Theorem~\ref{thm:main} is exact. The formulation recorded in \cite{WestPage}
+reads ``minimum degree at least $n(G)/3$''; taken literally, that non-strict variant fails
+precisely at this boundary: $W$ satisfies $\delta(W)=n(W)/3$ and admits no regular
+supergraph by vertex multiplications. The strict inequality in Brandt's original
+statements is therefore essential and cannot be relaxed.
+All assertions about $W$ are machine-checked by \texttt{verify/boundary9.py}.
+
+\section{Remarks}
+
+\emph{Computational corroboration.} Independent exact-rational verification over all
+maximal triangle-free graphs of order at most $17$ (catalogue counts matching the House of
+Graphs database) found no counterexample to Conjecture~\ref{conj:brandt}; every graph with
+$\df<3$ in that range admits a nonnegative equality solution, consistent with
+Theorem~\ref{thm:main}. The proof above does not depend on these computations.
+
+\emph{What is and is not claimed.} The result is conditional on \cite{LPR}. The searches we
+performed located no prior statement of the equivalence in Theorem~\ref{thm:main} or of the
+conjecture's resolution, and \cite{LPR} contains no mention of Conjecture~5.1, fractional
+domination, or LP duality; nevertheless we make no priority claim and request specialist
+review.
+
+\section{Provenance}\label{sec:provenance}
+
+The mathematics in this note was produced with substantial assistance from AI systems in
+research sessions directed by the author. Subsequently, every step was verified
+independently of those sessions: Lemma~\ref{lem:duality} by hand; the statements of
+Definition~\ref{def:dk} and Theorem~\ref{thm:lpr} against the posted text of \cite{LPR};
+Theorem~\ref{thm:vega} and Section~\ref{sec:sharp} by machine, using the standalone scripts
+distributed with this note. The author takes full responsibility for the content.
+
+\begin{thebibliography}{9}
+
+\bibitem{Brandt2002}
+S.~Brandt,
+\emph{A 4-colour problem for dense triangle-free graphs},
+Discrete Mathematics \textbf{251} (2002), no.~1--3, 33--46.
+DOI: \href{https://doi.org/10.1016/S0012-365X(01)00340-5}{10.1016/S0012-365X(01)00340-5}.
+
+\bibitem{LPR}
+T.~\L{}uczak, J.~Polcyn, and C.~Reiher,
+\emph{Strong Brandt--Thomass\'e Theorems},
+preprint, \href{https://arxiv.org/abs/2406.10745}{arXiv:2406.10745} (2024).
+
+\bibitem{WestPage}
+D.~B. West,
+\emph{Regular supergraphs of maximal triangle-free graphs},
+open problem page,
+\url{https://dwest.web.illinois.edu/openp/regsup.html}.
+
+\bibitem{BT}
+S.~Brandt and S.~Thomass\'e,
+\emph{Dense triangle-free graphs are four-colorable: a solution to the
+Erd\H{o}s--Simonovits problem}, manuscript.
+
+\end{thebibliography}
+
+\end{document}
