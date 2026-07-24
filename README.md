@@ -155,11 +155,11 @@ CITATION.cff              citation metadata
   new, which was incorrect and is corrected in this version (see release notes for v1.1).
 - Provenance: the mathematics in the note was produced with substantial AI assistance —
   research sessions run with OpenAI's GPT 5.6 Sol Pro, directed by the author, with
-  independent verification and review by Anthropic's Claude Fable 5 — after which every
+  independent verification and review by Anthropic's Claude Fable 5, after which every
   step was checked: the duality lemma by hand, the Vega weight identities and the boundary
   example by machine (the scripts in `verify/`), and the LPR statements against the posted
   PDFs. A further independent AI-assisted review identified the prior appearance of the
-  Vega weights and supplied the short route of Claim 1. The author takes full
+  Vega weights and supplied the short route of Claim 1. I takes full
   responsibility for the content.
 
 ## References
